@@ -6,18 +6,18 @@ struct Node {
     struct Node* next;
 };
 
-// Function to check if the list is empty
+
 int isEmpty(struct Node* head) {
     return head == NULL;
 }
 
-// Function to insert at the beginning of the circular linked list
+
 void insert_Beg(struct Node** head, int data) {
     struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
     newNode->data = data;
 
     if (isEmpty(*head)) {
-        newNode->next = newNode;  // Points to itself if the list is empty
+        newNode->next = newNode;  
         *head = newNode;
     } else {
         struct Node* temp = *head;
@@ -27,19 +27,19 @@ void insert_Beg(struct Node** head, int data) {
             temp = temp->next;
         }
 
-        temp->next = newNode;   // Last node now points to the new node
-        newNode->next = *head;  // New node points to the head
-        *head = newNode;        // Update head to the new node
+        temp->next = newNode;  
+        newNode->next = *head;  
+        *head = newNode;        
     }
 }
 
-// Function to insert at the end of the circular linked list
+
 void insert_End(struct Node** head, int data) {
     struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
     newNode->data = data;
 
     if (isEmpty(*head)) {
-        newNode->next = newNode;  // Points to itself if the list is empty
+        newNode->next = newNode;  
         *head = newNode;
     } else {
         struct Node* temp = *head;
@@ -49,12 +49,12 @@ void insert_End(struct Node** head, int data) {
             temp = temp->next;
         }
 
-        temp->next = newNode;  // Last node points to the new node
-        newNode->next = *head; // New node points to the head
+        temp->next = newNode;  
+        newNode->next = *head; 
     }
 }
 
-// Function to insert at a specific position in the circular linked list
+
 void insert_Pos(struct Node** head, int data, int pos) {
     if (pos < 1) {
         printf("Invalid position.\n");
@@ -65,27 +65,27 @@ void insert_Pos(struct Node** head, int data, int pos) {
     newNode->data = data;
 
     if (pos == 1) {
-        insert_Beg(head, data);  // If position is 1, insert at the beginning
+        insert_Beg(head, data); 
     } else {
         struct Node* temp = *head;
         int count = 1;
 
-        // Traverse to the node before the desired position
+        
         while (temp->next != *head && count < pos - 1) {
             temp = temp->next;
             count++;
         }
 
         if (count == pos - 1) {
-            newNode->next = temp->next;  // New node points to the next node
-            temp->next = newNode;        // Previous node points to the new node
+            newNode->next = temp->next;  
+            temp->next = newNode;       
         } else {
             printf("Position out of range.\n");
         }
     }
 }
 
-// Function to delete from the beginning of the circular linked list
+
 void delete_Beg(struct Node** head) {
     if (isEmpty(*head)) {
         printf("List is empty.\n");
@@ -93,7 +93,7 @@ void delete_Beg(struct Node** head) {
     }
 
     struct Node* temp = *head;
-    if (temp->next == *head) {  // Only one node in the list
+    if (temp->next == *head) {  
         *head = NULL;
         free(temp);
     } else {
@@ -104,13 +104,13 @@ void delete_Beg(struct Node** head) {
             last = last->next;
         }
 
-        *head = temp->next;  // Update head to the next node
-        last->next = *head;  // Last node points to the new head
+        *head = temp->next;  
+        last->next = *head;  
         free(temp);
     }
 }
 
-// Function to delete from the end of the circular linked list
+
 void delete_End(struct Node** head) {
     if (isEmpty(*head)) {
         printf("List is empty.\n");
@@ -118,24 +118,24 @@ void delete_End(struct Node** head) {
     }
 
     struct Node* temp = *head;
-    if (temp->next == *head) {  // Only one node in the list
+    if (temp->next == *head) {  
         *head = NULL;
         free(temp);
     } else {
         struct Node* prev = NULL;
 
-        // Traverse to the last node
+        
         while (temp->next != *head) {
             prev = temp;
             temp = temp->next;
         }
 
-        prev->next = *head;  // Second last node points to the head
+        prev->next = *head;  
         free(temp);
     }
 }
 
-// Function to delete a node from a specific position in the circular linked list
+
 void delete_Pos(struct Node** head, int pos) {
     if (isEmpty(*head) || pos < 1) {
         printf("Invalid position or list is empty.\n");
@@ -145,14 +145,14 @@ void delete_Pos(struct Node** head, int pos) {
     struct Node* temp = *head;
 
     if (pos == 1) {
-        delete_Beg(head);  // If position is 1, delete from the beginning
+        delete_Beg(head);  
         return;
     }
 
     struct Node* prev = NULL;
     int count = 1;
 
-    // Traverse to the node at the desired position
+    
     while (temp->next != *head && count < pos) {
         prev = temp;
         temp = temp->next;
@@ -161,7 +161,7 @@ void delete_Pos(struct Node** head, int pos) {
 
     if (count == pos) {
         prev->next = temp->next;
-        if (temp == *head) {  // If the node to delete is the head
+        if (temp == *head) {  
             *head = temp->next;
         }
         free(temp);
@@ -170,7 +170,7 @@ void delete_Pos(struct Node** head, int pos) {
     }
 }
 
-// Function to display the circular linked list
+
 void printList(struct Node* head) {
     if (isEmpty(head)) {
         printf("List is empty.\n");
@@ -186,7 +186,7 @@ void printList(struct Node* head) {
     printf("\n");
 }
 
-// Main function with menu options
+
 int main() {
     struct Node* head = NULL;
     int choice, data, pos;
